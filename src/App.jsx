@@ -32,9 +32,13 @@ function App() {
     fetchMovies();
   }, [search])
 
-  function handleSearch(input){
+  function handleSearch(input) {
     setSearch(input);
     setSelectedId(null);
+  }
+
+  function handleClick(id) {
+    setSelectedId(selectedId => id === selectedId ? null : id);
   }
 
   return (
@@ -47,7 +51,7 @@ function App() {
       <main>
         <Box width='25rem' height='fit-content' alignItems='center' justifyContent='center' flexDirection='column' padding='0' gap='0' minHeight='100px'>
           {!isLoading && movies.map((movie) => (
-            <Movie movie={movie} key={movie.imdbID} handleClick={setSelectedId} />
+            <Movie movie={movie} key={movie.imdbID} handleClick={handleClick} />
           ))}
 
           {isLoading && <p>Loading...</p>}
