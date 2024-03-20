@@ -1,0 +1,15 @@
+header{
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.search{
+    padding: 5px 15px;
+    width: 25rem;
+    outline: none;
+    border-radius: 2px;
+    border: 1px solid rgba(61, 60, 60, 0.418);
+    background-color: #8c5abb;
+    font-size: 10px;
+}
