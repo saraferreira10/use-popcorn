@@ -1,4 +1,4 @@
 # usePopcorn
 
-![image](https://github.com/saraferreira10/use-popcorn/assets/97038936/1eac497a-3e51-434d-a227-f4e0981eec40)
+https://github.com/saraferreira10/use-popcorn/assets/97038936/97f17933-24a3-4d84-a8ed-1754e8d61cf8
 
