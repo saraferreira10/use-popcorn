@@ -1,36 +1,16 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import Box from '../components/box/Box';
 import Menu from '../components/menu/Menu';
 import MovieCard from '../components/movie/MovieCard';
 import './App.css';
+import { useMovie } from './useMovie';
 
 function App() {
-
-  const KEY = "fb260a76";
-  const [movies, setMovies] = useState([]);
-  const [search, setSearch] = useState("marvel");
+  
+  const [search, setSearch] = useState("");
   const [selectedId, setSelectedId] = useState(null);
-  const [isLoading, setIsLoading] = useState(false)
+  const {movies, isLoading} = useMovie(search);
   const resultFounds = movies.length;
-
-  useEffect(function () {
-    async function fetchMovies() {
-      setIsLoading(true);
-      const res = await fetch(`http://www.omdbapi.com/?apikey=${KEY}&s=${search}`);
-      const data = await res.json();
-
-      if (data.Response === "True" && data.Search) {
-        console.log(data.Search)
-        setMovies(data.Search);
-      } else {
-        setMovies([]);
-      }
-
-      setIsLoading(false);
-    }
-
-    fetchMovies();
-  }, [search])
 
   function handleSearch(input) {
     setSearch(input);
@@ -83,7 +63,13 @@ function Movie({ movie, handleClick }) {
 }
 
 function Search({ search, handleSearch }) {
-  return <input type="text" name="search" id="search" className="search" value={search} onChange={(e) => handleSearch(e.target.value)} />
+  const inputEl = useRef(null);
+
+  useEffect(function () {
+    inputEl.current.focus();
+  }, [])
+
+  return <input type="text" name="search" id="search" className="search" ref={inputEl} value={search} onChange={(e) => handleSearch(e.target.value)} />
 }
 
 function Results({ num }) {

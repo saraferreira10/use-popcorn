@@ -1,27 +1,12 @@
 import { useEffect, useState } from "react";
 import "../movie/movie_card.css"
+import { useMovie } from "../../src/useMovie";
 
 const KEY = "fb260a76";
 
 export default function Movie({ id }) {
 
-    const [movie, setMovie] = useState([]);
-    const [isLoading, setIsLoading] = useState(false);
-
-    useEffect(function () {
-        async function fetchMovie() {
-            setIsLoading(true);
-            const res = await fetch(`http://www.omdbapi.com/?apikey=${KEY}&i=${id}`);
-            const data = await res.json();
-
-            console.log(data);
-            setMovie(data);
-            setIsLoading(false);
-
-        }
-
-        fetchMovie();
-    }, [])
+    const { movies: movie, isLoading } = useMovie(null, id);
 
     return (
         <div>
